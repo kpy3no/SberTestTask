@@ -1,0 +1,13 @@
+.idea
+*.iml
+.DS_Store
+target
+.module-cache
+out
+generated
+node_modules
+
+# Eclipse IDE
+.classpath
+.project
+.settings

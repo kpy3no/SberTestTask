@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<information>
+    <error_name_exist>Такое имя уже занято</error_name_exist>
+    <error_input_login>Пользователь с таким логином и паролем не существует</error_input_login>
+    <error_input_data>Некорректные данные</error_input_data>
+</information>

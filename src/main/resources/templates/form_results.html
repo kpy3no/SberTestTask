@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Results</title>
+    <link href="../static/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                if($(this).hasClass("active"))
+                    $(this).removeClass('active');
+                else
+                    $(this).addClass('active').siblings().removeClass('active');
+                var url = $(this).attr('href');
+                window.location = url;
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="center-block"><h1>Пройденные тесты</h1></div>
+    </div>
+    <div class="container">
+        <table class="table table-stripped table-bordered">
+            <thead>
+                <tr>
+                    <th>Пользователь</th>
+                    <th>Опросник</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+                <th:block th:each="passedTest : ${passedTests}">
+                    <tr class="clickable-row" th:href="@{answer_result(id=${passedTest.id})}">
+                        <td th:text="${passedTest.user.name}"></td>
+                        <td th:text="${passedTest.questionnaire.label}"></td>
+                        <td th:text="${passedTest.date}"></td>
+                    </tr>
+                </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>

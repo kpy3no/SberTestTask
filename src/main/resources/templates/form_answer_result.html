@@ -1,0 +1,33 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Answer results</title>
+    <link href="../static/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container" th:if="${passedTest != null}">
+    <p><h2>Test - <span class="text-primary" th:text="${passedTest.questionnaire.label}"></span></h2></p>
+    <p><h4>Passed by - <span class="text-primary" th:text="${passedTest.user.name}"></span> , on
+        <span class="text-primary" th:text ="${passedTest.date}"></span></h4></p>
+    <th:block th:each="answer : ${passedTest.answerSet}">
+        <p ><span th:text="${answer.question.question}"></span>:
+            <th:block th:switch="${answer.class.name}">
+                <span th:case="'org.example.domain.StringAnswer'" th:text="${answer.answer}" ></span>
+                <span th:case="'org.example.domain.FactorialAnswer'" th:text="${answer.answer.answer}" ></span>
+                <th:block th:case="'org.example.domain.FactorialMultipleAnswer'">
+                    <th:block th:each="answerVariant : ${answer.answers}">
+                    <span><span  th:text="${answerVariant.answer}" ></span>   </span>
+                    </th:block>
+                </th:block>
+
+            </th:block>
+        </p>
+    </th:block>
+</div>
+</body>
+</html>
